@@ -8,9 +8,9 @@ import Loader from "./Loader";
 import PlanItem from "./PlanItem";
 
 const sortOptions = [
-  { value: "duration", label: "Duration", key: "duration" },
-  { value: "calories", label: "Calories", key: "caloriesBurned" },
-  { value: "rating", label: "Rating", key: "rating" },
+  { value: "duration", label: "Duration", key: "duration", order: "asc" }, // shortest first
+  { value: "calories", label: "Calories", key: "caloriesBurned", order: "desc" }, // most first
+  { value: "rating", label: "Rating", key: "rating", order: "desc" }, // best first
 ];
 
 const tabs = [
@@ -23,10 +23,10 @@ export default function MyPlan() {
   const [activeTab, setActiveTab] = useState("plan");
   const [sortBy, setSortBy] = useState("duration");
 
-  // Sort the current tab's list (highest first)
-  const sortKey = sortOptions.find((o) => o.value === sortBy).key;
-  const list = [...(activeTab === "plan" ? plan : saved)].sort(
-    (a, b) => b[sortKey] - a[sortKey]
+  // Sort the current tab's list by the selected option
+  const { key: sortKey, order } = sortOptions.find((o) => o.value === sortBy);
+  const list = [...(activeTab === "plan" ? plan : saved)].sort((a, b) =>
+    order === "asc" ? a[sortKey] - b[sortKey] : b[sortKey] - a[sortKey]
   );
 
   // Metrics for today's plan — update live as items are added/removed
@@ -47,11 +47,11 @@ export default function MyPlan() {
       </p>
 
       {/* Metrics summary */}
-      <div className="mt-6 grid grid-cols-3 rounded-2xl border border-[#232732] bg-[#13161d] py-6 sm:py-8">
+      <div className="mt-6 grid grid-cols-3 rounded-2xl border border-[#232732] bg-[#13161d] px-3 py-6 sm:px-6 sm:pb-7 sm:pt-8">
         {metrics.map((metric, index) => (
           <div
             key={metric.label}
-            className={`px-4 sm:px-8 ${index > 0 ? "border-l border-[#232732]" : ""}`}
+            className={index > 0 ? "border-l border-[#232732] pl-3 sm:pl-8" : "pr-3"}
           >
             <p className="text-xs text-[#8a92a0]">{metric.label}</p>
             <p
@@ -114,7 +114,7 @@ export default function MyPlan() {
         {!loaded ? (
           <Loader text="Loading workouts…" />
         ) : list.length === 0 ? (
-          <div className="flex flex-col items-center rounded-xl border border-dashed border-[#2b303d] bg-[#111317] px-6 py-20 text-center">
+          <div className="flex min-h-[300px] flex-col items-center justify-center rounded-xl border border-dashed border-white/10 bg-[#111317]/50 px-6 py-16 text-center">
             <h2 className="font-display text-xl font-bold uppercase tracking-[0.035em]">
               Nothing here yet
             </h2>
@@ -123,7 +123,7 @@ export default function MyPlan() {
             </p>
             <Link
               href="/"
-              className="mt-6 rounded-full bg-accent-dark px-6 py-2.5 text-xs font-semibold text-black transition hover:bg-accent"
+              className="mt-6 rounded-full bg-accent-dark px-6 py-2.5 text-xs font-semibold tracking-[-0.02em] text-black transition hover:bg-accent"
             >
               Go to workouts
             </Link>
