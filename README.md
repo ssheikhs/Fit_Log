@@ -11,7 +11,7 @@ the workout data comes from the FitLog API.
 
 The idea is simple: pick a lift, lock it into today's plan, and watch the week's work add up.
 
-- **Live Link:** _coming soon_
+- **Live Link:** https://fit-log-gules-theta.vercel.app/
 - **GitHub Repo:** https://github.com/ssheikhs/Fit_Log
 
 ## Technologies Used
