@@ -3,15 +3,19 @@ import Link from "next/link";
 import WorkoutStats from "./WorkoutStats";
 
 // One workout row on the My Plan page
-export default function PlanItem({ workout, children }) {
+export default function PlanItem({ workout, done = false, children }) {
   return (
-    <article className="flex flex-col gap-4 rounded-2xl border border-[#232732] bg-[#14171e] p-4 sm:flex-row sm:items-center sm:justify-between">
+    <article className={`flex flex-col gap-4 rounded-2xl border border-[#232732] bg-[#14171e] p-4 sm:flex-row sm:items-center sm:justify-between ${done ? "opacity-70" : ""}`}>
       <div className="flex items-center gap-4">
         <div className="relative h-20 w-28 shrink-0 overflow-hidden rounded-xl bg-[#1f2937] sm:w-36">
           <Image src={workout.image} alt={workout.name} fill sizes="144px" className="object-cover" />
         </div>
         <div className="min-w-0">
-          <h2 className="font-display text-base font-bold uppercase tracking-[0.025em]">
+          <h2
+            className={`font-display text-base font-bold uppercase tracking-[0.025em] ${
+              done ? "line-through decoration-accent decoration-2" : ""
+            }`}
+          >
             {workout.name}
           </h2>
           <p className="text-xs text-[#8a92a0]">{workout.equipment}</p>

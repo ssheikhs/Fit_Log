@@ -1,10 +1,17 @@
 "use client";
 
 import { useState } from "react";
+import { Check, ChevronDown, X } from "lucide-react";
 import Link from "next/link";
 import { usePlan } from "@/context/PlanContext";
 import Loader from "./Loader";
 import PlanItem from "./PlanItem";
+
+const sortOptions = [
+  { value: "duration", label: "Duration", key: "duration" },
+  { value: "calories", label: "Calories", key: "caloriesBurned" },
+  { value: "rating", label: "Rating", key: "rating" },
+];
 
 const tabs = [
   { key: "plan", label: "Today's Plan" },
@@ -12,10 +19,15 @@ const tabs = [
 ];
 
 export default function MyPlan() {
-  const { plan, saved, loaded } = usePlan();
+  const { plan, saved, loaded, markAsDone, removeWorkout } = usePlan();
   const [activeTab, setActiveTab] = useState("plan");
+  const [sortBy, setSortBy] = useState("duration");
 
-  const list = activeTab === "plan" ? plan : saved;
+  // Sort the current tab's list (highest first)
+  const sortKey = sortOptions.find((o) => o.value === sortBy).key;
+  const list = [...(activeTab === "plan" ? plan : saved)].sort(
+    (a, b) => b[sortKey] - a[sortKey]
+  );
 
   // Metrics for today's plan — update live as items are added/removed
   const totalMinutes = plan.reduce((sum, w) => sum + w.duration, 0);
@@ -73,6 +85,28 @@ export default function MyPlan() {
             </button>
           ))}
         </div>
+
+        {/* Sort dropdown */}
+        <label className="flex items-center gap-3 text-xs text-[#8a92a0]">
+          Sort By
+          <span className="relative">
+            <select
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+              className="cursor-pointer appearance-none rounded-lg border border-[#232732] bg-[#13161d] py-2 pl-3 pr-9 text-xs text-white outline-none focus:border-accent"
+            >
+              {sortOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+            <ChevronDown
+              size={14}
+              className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-white"
+            />
+          </span>
+        </label>
       </div>
 
       {/* List / loading / empty state */}
@@ -97,7 +131,31 @@ export default function MyPlan() {
         ) : (
           <div className="space-y-4">
             {list.map((workout) => (
-              <PlanItem key={workout.id} workout={workout} />
+              <PlanItem key={workout.id} workout={workout} done={workout.done}>
+                {activeTab === "plan" && (
+                  <button
+                    type="button"
+                    onClick={() => markAsDone(workout.id)}
+                    className={`inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-semibold transition ${
+                      workout.done
+                        ? "border border-accent/40 bg-[#1a2312] text-accent"
+                        : "bg-accent text-black hover:brightness-95"
+                    }`}
+                  >
+                    <Check size={14} strokeWidth={2.5} />
+                    {workout.done ? "Done" : "Mark as Done"}
+                  </button>
+                )}
+                <button
+                  type="button"
+                  onClick={() => removeWorkout(workout.id, activeTab)}
+                  aria-label={`Remove ${workout.name}`}
+                  title="Remove"
+                  className="rounded-full p-1.5 text-[#8a92a0] transition hover:bg-red-500/10 hover:text-red-400"
+                >
+                  <X size={16} />
+                </button>
+              </PlanItem>
             ))}
           </div>
         )}

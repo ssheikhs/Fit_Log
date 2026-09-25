@@ -49,6 +49,32 @@ export function PlanProvider({ children }) {
     toast.success(`Saved ${workout.name} for later`);
   };
 
+  // Toggle "done" on a plan item
+  const markAsDone = (id) => {
+    const workout = plan.find((w) => w.id === id);
+    if (!workout) return;
+    updateStore((s) => ({
+      ...s,
+      plan: s.plan.map((w) => (w.id === id ? { ...w, done: !w.done } : w)),
+    }));
+    if (workout.done) {
+      toast(`${workout.name} marked as not done`, { icon: "↩️" });
+    } else {
+      toast.success(`Nice work! ${workout.name} marked as done`);
+    }
+  };
+
+  // Remove from "plan" or "saved"
+  const removeWorkout = (id, listName) => {
+    const list = listName === "saved" ? saved : plan;
+    const workout = list.find((w) => w.id === id);
+    if (!workout) return;
+    updateStore((s) => ({ ...s, [listName]: s[listName].filter((w) => w.id !== id) }));
+    toast.success(
+      `Removed ${workout.name} from ${listName === "saved" ? "Saved" : "today's plan"}`
+    );
+  };
+
   const value = {
     plan,
     saved,
@@ -57,6 +83,8 @@ export function PlanProvider({ children }) {
     isSaved,
     addToPlan,
     saveForLater,
+    markAsDone,
+    removeWorkout,
   };
 
   return <PlanContext.Provider value={value}>{children}</PlanContext.Provider>;
