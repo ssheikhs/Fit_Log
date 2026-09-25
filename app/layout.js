@@ -1,6 +1,7 @@
 import { Inter, Oswald } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
+import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { PlanProvider } from "@/context/PlanContext";
 
@@ -31,6 +32,7 @@ export default function RootLayout({ children }) {
         <PlanProvider>
           <Navbar />
           <main className="flex-1">{children}</main>
+          <Footer />
           <Toaster
             position="top-center"
             toastOptions={{
