@@ -1,8 +1,8 @@
-# 💪 FitLog — Workout Library
+# FitLog — Workout Library
 
 > **Train with intent. Log every set.**
 
-## 📝 Project Description
+## Project Description
 
 FitLog is my Programming Hero Assignment 6 project. It is a dark, no-nonsense gym companion website
 where you can browse a library of 12 workouts, open any workout to see its details and instructions,
@@ -11,10 +11,10 @@ the workout data comes from the FitLog API.
 
 The idea is simple: pick a lift, lock it into today's plan, and watch the week's work add up.
 
-🔗 **Live Link:** _coming soon_
-📂 **GitHub Repo:** https://github.com/ssheikhs/fit-log
+- **Live Link:** _coming soon_
+- **GitHub Repo:** https://github.com/ssheikhs/Fit_Log
 
-## 🛠️ Technologies Used
+## Technologies Used
 
 - **Next.js 16** (App Router) — pages, routing and fetching data from the API
 - **React 19** — components and state
@@ -24,7 +24,7 @@ The idea is simple: pick a lift, lock it into today's plan, and watch the week's
 - **Google Fonts (Oswald + Inter)** — headings and body text
 - **Vercel** — deployment
 
-## ✨ Features
+## Features
 
 1. **Workout Library** — all 12 workouts load from the API and show as cards in a 3×4 grid, with a loading animation while the data is being fetched.
 2. **Workout Details Page** — each workout has its own page with a big image, a key specs table (equipment, difficulty, sets, reps, duration, calories, rating) and step-by-step instructions.
@@ -34,11 +34,11 @@ The idea is simple: pick a lift, lock it into today's plan, and watch the week's
 6. **Responsive Design** — works on mobile, tablet and desktop.
 7. **Custom 404 Page** — any wrong URL shows a friendly "Missed the rep" page with a button back to the workouts.
 
-## 🚀 How to Run Locally
+## How to Run Locally
 
 ```bash
-git clone https://github.com/ssheikhs/fit-log.git
-cd fit-log
+git clone https://github.com/ssheikhs/Fit_Log.git
+cd Fit_Log
 npm install
 npm run dev
 ```
