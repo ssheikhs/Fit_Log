@@ -136,7 +136,7 @@ export default function MyPlan() {
                   <button
                     type="button"
                     onClick={() => markAsDone(workout.id)}
-                    className={`inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-semibold transition ${
+                    className={`inline-flex flex-1 items-center justify-center gap-1.5 whitespace-nowrap rounded-full px-3 py-2 text-xs font-semibold transition sm:flex-none sm:px-4 ${
                       workout.done
                         ? "border border-accent/40 bg-[#1a2312] text-accent"
                         : "bg-accent text-black hover:brightness-95"
@@ -151,7 +151,7 @@ export default function MyPlan() {
                   onClick={() => removeWorkout(workout.id, activeTab)}
                   aria-label={`Remove ${workout.name}`}
                   title="Remove"
-                  className="rounded-full p-1.5 text-[#8a92a0] transition hover:bg-red-500/10 hover:text-red-400"
+                  className="shrink-0 rounded-full p-1.5 text-[#8a92a0] transition hover:bg-red-500/10 hover:text-red-400"
                 >
                   <X size={16} />
                 </button>

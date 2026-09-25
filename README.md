@@ -1,36 +1,98 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<div align="center">
 
-## Getting Started
+<img src="public/logo.png" alt="FitLog logo" width="56" />
 
-First, run the development server:
+# 💪 FitLog — Workout Library
+
+**Train with intent. Log every set.**
+
+A dark, no-nonsense gym companion: pick a lift, lock it into today's plan, and watch the week's work add up.
+
+[Live Site](#-live-link) · [Features](#-key-features) · [Tech Stack](#%EF%B8%8F-technologies-used) · [Run Locally](#-run-locally)
+
+</div>
+
+---
+
+## 📖 About the Project
+
+FitLog is a responsive workout-library web app built with **Next.js (App Router)** and **Tailwind CSS**.
+It loads twelve lifts from the FitLog API, shows each one with its specs and step-by-step instructions,
+and lets you build a daily training plan (max five lifts) or save workouts for later. Your plan is
+stored in the browser, so it's still there after a page reload.
+
+## 🔗 Live Link
+
+- **Live site:** _add your Vercel link here_
+- **GitHub repo:** https://github.com/ssheikhs/fit-log
+
+## ✨ Key Features
+
+1. **Workout Library from a live API** — 12 workouts fetched from the FitLog API and shown in a responsive 3×4 card grid with tags, equipment and duration / calories / rating stats, plus a loading spinner while data is fetched.
+2. **Workout Details Page** — two-column layout with a large image, key specs table (equipment, difficulty, sets, reps, duration, calories, rating) and numbered instructions.
+3. **Today's Plan & Saved lists** — "Add to today's plan" and "Save for later" buttons with toast notifications and live navbar badge counters. The plan is capped at five lifts.
+4. **My Plan dashboard** — live Exercises / Minutes / Calories summary, Today's Plan / Saved tabs, a Sort By dropdown (Duration, Calories, Rating), plus **Mark as Done** and **Remove** actions with toasts.
+5. **Saved in the browser** — plan and saved workouts are kept in `localStorage`, so nothing is lost on reload.
+6. **Fully responsive** — works on mobile, tablet and desktop (grid collapses, hero stacks, navbar stays usable).
+7. **Friendly edge cases** — custom 404 page for unknown routes, "Nothing here yet" empty state, and an error page with a retry button if the API fails.
+
+## 🛠️ Technologies Used
+
+| Technology | Purpose |
+| --- | --- |
+| [Next.js 16](https://nextjs.org/) (App Router) | Pages, routing, server-side data fetching |
+| [React 19](https://react.dev/) | UI components and state |
+| [Tailwind CSS 4](https://tailwindcss.com/) | Styling and responsive layout |
+| [lucide-react](https://lucide.dev/) | Icons |
+| [react-hot-toast](https://react-hot-toast.com/) | Toast notifications |
+| `next/font` (Oswald + Inter) | Display and body fonts |
+| [Vercel](https://vercel.com/) | Deployment |
+
+## 🗂️ Pages
+
+| Route | Page |
+| --- | --- |
+| `/` | Home — hero banner + workout library |
+| `/workout/[id]` | Workout details |
+| `/my-plan` | My Plan — Today's Plan and Saved tabs |
+| any other URL | Custom 404 page |
+
+## 🔌 API
+
+- All workouts: `https://api.abcz.workers.dev/api/fitlog`
+- Single workout: `https://api.abcz.workers.dev/api/fitlog/:id`
+
+## 🚀 Run Locally
 
 ```bash
+git clone https://github.com/ssheikhs/fit-log.git
+cd fit-log
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 📁 Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+app/
+  layout.js            # Navbar, footer, toasts, plan provider
+  page.js              # Home: hero + library
+  workout/[id]/page.js # Workout details
+  my-plan/page.js      # My Plan
+  not-found.js         # 404 page
+  error.js             # Error fallback
+components/            # Navbar, Hero, WorkoutCard, MyPlan, Footer, ...
+context/PlanContext.js # Add / save / done / remove actions + toasts
+lib/api.js             # API helpers
+lib/planStore.js       # localStorage-backed plan store
+```
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+<div align="center">
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+© 2026 FitLog — Workout Library. Train hard, log honest.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+</div>
