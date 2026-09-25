@@ -1,4 +1,4 @@
-// Spinning dumbbell-style loader shown while data is fetched
+// Spinning loader shown while data is fetched
 export default function Loader({ text = "Loading workouts…" }) {
   return (
     <div className="flex flex-col items-center justify-center gap-4 py-24" role="status">
