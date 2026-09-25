@@ -2,7 +2,7 @@
 
 /* FitLog theme — colors taken from the Figma design */
 @theme inline {
-  --color-base: #0f1115;
+  --color-ink: #0f1115;
   --color-surface: #15171d;
   --color-surface-2: #1f232b;
   --color-line: #1f2937;
@@ -19,7 +19,7 @@ html {
 }
 
 body {
-  background: var(--color-base);
+  background: var(--color-ink);
   color: #ffffff;
   font-family: var(--font-inter), Arial, Helvetica, sans-serif;
 }

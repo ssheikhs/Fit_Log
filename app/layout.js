@@ -26,7 +26,7 @@ export default function RootLayout({ children }) {
       lang="en"
       className={`${inter.variable} ${oswald.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-base text-white">
+      <body className="min-h-full flex flex-col bg-ink text-white">
         <PlanProvider>
           <Navbar />
           <main className="flex-1">{children}</main>
