@@ -1,5 +1,7 @@
 import { Inter, Oswald } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/Navbar";
+import { PlanProvider } from "@/context/PlanContext";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -25,7 +27,10 @@ export default function RootLayout({ children }) {
       className={`${inter.variable} ${oswald.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-base text-white">
-        <main className="flex-1">{children}</main>
+        <PlanProvider>
+          <Navbar />
+          <main className="flex-1">{children}</main>
+        </PlanProvider>
       </body>
     </html>
   );
